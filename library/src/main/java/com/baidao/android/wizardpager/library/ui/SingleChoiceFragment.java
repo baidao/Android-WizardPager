@@ -65,7 +65,7 @@ public class SingleChoiceFragment extends ListFragment {
 
         SingleFixedChoicePage fixedChoicePage = (SingleFixedChoicePage) mPage;
         mChoices = new ArrayList<String>(fixedChoicePage.getOptionCount());
-        for (int i = 0; i < mChoices.size(); i++) {
+        for (int i = 0; i < fixedChoicePage.getOptionCount(); i++) {
             mChoices.add(fixedChoicePage.getOptionAt(i));
         }
     }

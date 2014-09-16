@@ -39,7 +39,7 @@ public class SandwichWizardModel extends AbstractWizardModel {
                 .addBranch(
                     "Sandwich",
                     new SingleFixedChoicePage(this, "Bread")
-                        .setChoices("White","Wheat", "Rye", "Pretzel", "Ciabatta")
+                        .setChoices("White", "Wheat", "Rye", "Pretzel", "Ciabatta")
                         .setRequired(true),
 
                     new MultipleFixedChoicePage(this, "Meats")

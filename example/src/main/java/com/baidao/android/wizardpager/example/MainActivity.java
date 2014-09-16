@@ -37,7 +37,6 @@ import com.baidao.android.wizardpager.library.model.Page;
 import com.baidao.android.wizardpager.library.ui.PageFragmentCallbacks;
 import com.baidao.android.wizardpager.library.ui.ReviewFragment;
 import com.baidao.android.wizardpager.library.ui.StepPagerStrip;
-import com.example.android.wizardpager.R;
 
 import java.util.List;
 

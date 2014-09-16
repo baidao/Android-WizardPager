@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
+import com.baidao.android.wizardpager.example.R;
 import com.baidao.android.wizardpager.library.ui.PageFragmentCallbacks;
-import com.example.android.wizardpager.R;
 
 /**
  * Created by TechFreak on 04/09/2014.

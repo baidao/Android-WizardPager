@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.baidao.android.wizardpager.library.R;
+import com.baidao.android.wizardpager.library.common.UIManager;
 import com.baidao.android.wizardpager.library.model.Page;
 
 
@@ -72,13 +73,18 @@ public class ImageFragment extends Fragment {
 		}
 	}
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        UIManager.setActionBarTitle(mPage, this);
+    }
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_page_image,
 				container, false);
-		((TextView) rootView.findViewById(android.R.id.title)).setText(mPage
-				.getTitle());
+        UIManager.setTitle(mPage, this, rootView);
 
 		imageView = (ImageView) rootView.findViewById(R.id.imageView);
 

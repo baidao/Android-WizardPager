@@ -43,13 +43,16 @@ public class SandwichWizardModel extends AbstractWizardModel {
                         .setRequired(true),
 
                     new MultipleFixedChoicePage(this, "Meats")
-                        .setChoices("Pepperoni", "Turkey", "Ham", "Pastrami", "Roast Beef", "Bologna"),
+                        .setChoices("Pepperoni", "Turkey", "Ham", "Pastrami", "Roast Beef", "Bologna")
+                        .setShowTitleInActionBar(true),
 
                     new MultipleFixedChoicePage(this, "Veggies")
-                        .setChoices("Tomatoes", "Lettuce", "Onions", "Pickles", "Cucumbers", "Peppers"),
+                        .setChoices("Tomatoes", "Lettuce", "Onions", "Pickles", "Cucumbers", "Peppers")
+                        .setShowTitleInActionBar(true),
 
                     new MultipleFixedChoicePage(this, "Cheeses")
-                        .setChoices("Swiss", "American", "Pepperjack", "Muenster", "Provolone", "White American", "Cheddar", "Bleu"),
+                        .setChoices("Swiss", "American", "Pepperjack", "Muenster", "Provolone", "White American", "Cheddar", "Bleu")
+                        .setShowTitleInActionBar(true),
 
                     new BranchPage(this, "Toasted?")
                         .addBranch(
@@ -63,15 +66,18 @@ public class SandwichWizardModel extends AbstractWizardModel {
                     "Salad",
                     new SingleFixedChoicePage(this, "Salad type")
                         .setChoices("Greek", "Caesar")
+                        .setShowTitleInActionBar(true)
+                        .setShowTitleInContent(false)
                         .setRequired(true),
 
                     new SingleFixedChoicePage(this, "Dressing")
                         .setChoices("No dressing", "Balsamic", "Oil & vinegar","Thousand Island", "Italian")
-                        .setValue("No dressing"),
+                        .setValue("No dressing")
+                        .setShowTitleInActionBar(true),
 
                     new NumberPage(this, "How Many Salads?")
                         .setRequired(true)
-                ),
+                ).setShowTitleInContent(true),
 
             new TextPage(this, "Comments")
                 .setRequired(true),

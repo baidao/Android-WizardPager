@@ -39,6 +39,8 @@ public abstract class Page implements PageTreeNode {
     protected String mTitle;
     protected boolean mRequired = false;
     protected String mParentKey;
+    protected boolean showTitleInActionBar = true;
+    protected boolean showTitleInContent = false;
 
     protected Page(ModelCallbacks callbacks, String title) {
         mCallbacks = callbacks;
@@ -94,6 +96,24 @@ public abstract class Page implements PageTreeNode {
 
     public Page setRequired(boolean required) {
         mRequired = required;
+        return this;
+    }
+
+    public boolean isShowTitleInActionBar() {
+        return showTitleInActionBar;
+    }
+
+    public Page setShowTitleInActionBar(boolean showTitleInActionBar) {
+        this.showTitleInActionBar = showTitleInActionBar;
+        return this;
+    }
+
+    public boolean isShowTitleInContent() {
+        return showTitleInContent;
+    }
+
+    public Page setShowTitleInContent(boolean showTitleInContent) {
+        this.showTitleInContent = showTitleInContent;
         return this;
     }
 }

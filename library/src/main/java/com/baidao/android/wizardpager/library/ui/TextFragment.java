@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.baidao.android.wizardpager.library.R;
+import com.baidao.android.wizardpager.library.common.UIManager;
 import com.baidao.android.wizardpager.library.model.Page;
 
 
@@ -46,13 +47,18 @@ public class TextFragment extends Fragment {
 		mPage = mCallbacks.onGetPage(mKey);
 	}
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        UIManager.setActionBarTitle(mPage, this);
+    }
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_page_text,
 				container, false);
-		((TextView) rootView.findViewById(android.R.id.title)).setText(mPage
-				.getTitle());
+        UIManager.setTitle(mPage, this, rootView);
 
 		mEditTextInput = (EditText) rootView.findViewById(R.id.editTextInput);
 		mEditTextInput.setText(mPage.getData().getString(Page.SIMPLE_DATA_KEY));

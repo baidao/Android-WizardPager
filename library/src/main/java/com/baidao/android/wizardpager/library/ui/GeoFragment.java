@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.baidao.android.wizardpager.library.R;
+import com.baidao.android.wizardpager.library.common.UIManager;
 import com.baidao.android.wizardpager.library.model.Page;
 import com.baidao.android.wizardpager.library.model.SimpleLocationListener;
 
@@ -59,12 +60,17 @@ public class GeoFragment extends Fragment implements SimpleLocationListener {
     }
 
     @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        UIManager.setActionBarTitle(mPage, this);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_page_geo, container,
                 false);
-        ((TextView) rootView.findViewById(android.R.id.title)).setText(mPage
-                .getTitle());
+        UIManager.setTitle(mPage, this, rootView);
 
         textViewLocationStatus = (TextView) rootView
                 .findViewById(R.id.textViewLocationStatus);

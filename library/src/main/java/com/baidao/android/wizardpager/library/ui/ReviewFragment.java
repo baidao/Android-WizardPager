@@ -29,6 +29,7 @@ import android.widget.TextView;
 
 
 import com.baidao.android.wizardpager.library.R;
+import com.baidao.android.wizardpager.library.common.UIManager;
 import com.baidao.android.wizardpager.library.model.AbstractWizardModel;
 import com.baidao.android.wizardpager.library.model.ModelCallbacks;
 import com.baidao.android.wizardpager.library.model.Page;

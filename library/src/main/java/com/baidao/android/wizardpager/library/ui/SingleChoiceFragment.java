@@ -28,6 +28,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.baidao.android.wizardpager.library.R;
+import com.baidao.android.wizardpager.library.common.UIManager;
 import com.baidao.android.wizardpager.library.model.Page;
 import com.baidao.android.wizardpager.library.model.SingleFixedChoicePage;
 
@@ -71,10 +72,16 @@ public class SingleChoiceFragment extends ListFragment {
     }
 
     @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        UIManager.setActionBarTitle(mPage, this);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_page, container, false);
-        ((TextView) rootView.findViewById(android.R.id.title)).setText(mPage.getTitle());
+        UIManager.setTitle(mPage, this, rootView);
 
         final ListView listView = (ListView) rootView.findViewById(android.R.id.list);
         setListAdapter(new ArrayAdapter<String>(getActivity(),

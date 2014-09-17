@@ -30,6 +30,7 @@ import android.widget.TextView;
 
 
 import com.baidao.android.wizardpager.library.R;
+import com.baidao.android.wizardpager.library.common.UIManager;
 import com.baidao.android.wizardpager.library.model.MultipleFixedChoicePage;
 import com.baidao.android.wizardpager.library.model.Page;
 
@@ -39,7 +40,7 @@ import java.util.List;
 import java.util.Set;
 
 
-public class MultipleChoiceFragment extends ListFragment {
+public class MultipleChoiceFragment extends ListFragment implements IPageFragment {
     private static final String ARG_KEY = "key";
 
     private PageFragmentCallbacks mCallbacks;
@@ -75,16 +76,19 @@ public class MultipleChoiceFragment extends ListFragment {
     }
 
     @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        UIManager.setActionBarTitle(mPage, this);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_page, container, false);
-        ((TextView) rootView.findViewById(android.R.id.title)).setText(mPage.getTitle());
+        View rootView = inflater.inflate(getContentLayout(), container, false);
+        UIManager.setTitle(mPage, this, rootView);
 
         final ListView listView = (ListView) rootView.findViewById(android.R.id.list);
-        setListAdapter(new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_multiple_choice,
-                android.R.id.text1,
-                mChoices));
+        setListAdapter(getAdapter());
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
         // Pre-select currently selected items.
@@ -108,6 +112,13 @@ public class MultipleChoiceFragment extends ListFragment {
         });
 
         return rootView;
+    }
+
+    protected ArrayAdapter<String> getAdapter() {
+        return new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_list_item_multiple_choice,
+                android.R.id.text1,
+                mChoices);
     }
 
     @Override
@@ -139,5 +150,10 @@ public class MultipleChoiceFragment extends ListFragment {
 
         mPage.getData().putStringArrayList(Page.SIMPLE_DATA_KEY, selections);
         mPage.notifyDataChanged();
+    }
+
+    @Override
+    public int getContentLayout() {
+        return R.layout.fragment_page;
     }
 }

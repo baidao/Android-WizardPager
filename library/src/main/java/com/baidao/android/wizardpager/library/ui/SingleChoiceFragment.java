@@ -36,14 +36,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SingleChoiceFragment extends ListFragment {
-    private static final String ARG_KEY = "key";
+public class SingleChoiceFragment<T extends Page> extends ListFragment {
+    protected static final String ARG_KEY = "key";
 
-    private PageFragmentCallbacks mCallbacks;
-    private List<String> mChoices;
-    private String mKey;
-    private Page mPage;
-    private int contentLayout = R.layout.fragment_page;
+    protected PageFragmentCallbacks mCallbacks;
+    protected List<String> mChoices;
+    protected String mKey;
+    protected T mPage;
+    protected int contentLayout = R.layout.fragment_page;
 
     public static SingleChoiceFragment create(String key) {
         Bundle args = new Bundle();
@@ -63,8 +63,12 @@ public class SingleChoiceFragment extends ListFragment {
 
         Bundle args = getArguments();
         mKey = args.getString(ARG_KEY);
-        mPage = mCallbacks.onGetPage(mKey);
+        mPage = (T) mCallbacks.onGetPage(mKey);
 
+        initChoices();
+    }
+
+    protected void initChoices() {
         SingleFixedChoicePage fixedChoicePage = (SingleFixedChoicePage) mPage;
         mChoices = new ArrayList<String>(fixedChoicePage.getOptionCount());
         for (int i = 0; i < fixedChoicePage.getOptionCount(); i++) {
@@ -91,6 +95,12 @@ public class SingleChoiceFragment extends ListFragment {
                 mChoices));
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
+        restoreState(listView);
+
+        return rootView;
+    }
+
+    protected void restoreState(final ListView listView) {
         // Pre-select currently selected item.
         new Handler().post(new Runnable() {
             @Override
@@ -104,8 +114,6 @@ public class SingleChoiceFragment extends ListFragment {
                 }
             }
         });
-
-        return rootView;
     }
 
     @Override
@@ -128,7 +136,7 @@ public class SingleChoiceFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         mPage.getData().putString(Page.SIMPLE_DATA_KEY,
-                getListAdapter().getItem(position).toString());
+            getListAdapter().getItem(position).toString());
         mPage.notifyDataChanged();
     }
 

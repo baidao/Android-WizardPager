@@ -26,7 +26,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 
 import com.baidao.android.wizardpager.library.R;
@@ -40,15 +39,15 @@ import java.util.List;
 import java.util.Set;
 
 
-public class MultipleChoiceFragment extends ListFragment {
-    private static final String ARG_KEY = "key";
+public class MultipleChoiceFragment<T extends Page, I> extends ListFragment {
+    protected static final String ARG_KEY = "key";
 
-    private PageFragmentCallbacks mCallbacks;
-    private String mKey;
-    private List<String> mChoices;
-    private Page mPage;
+    protected PageFragmentCallbacks mCallbacks;
+    protected String mKey;
+    protected List<String> mChoices;
+    protected T mPage;
 
-    private int contentLayout = R.layout.fragment_page;
+    protected int contentLayout = R.layout.fragment_page;
 
     public static MultipleChoiceFragment create(String key) {
         Bundle args = new Bundle();
@@ -68,8 +67,12 @@ public class MultipleChoiceFragment extends ListFragment {
 
         Bundle args = getArguments();
         mKey = args.getString(ARG_KEY);
-        mPage = mCallbacks.onGetPage(mKey);
+        mPage = (T) mCallbacks.onGetPage(mKey);
 
+        initChoices();
+    }
+
+    protected void initChoices() {
         MultipleFixedChoicePage fixedChoicePage = (MultipleFixedChoicePage) mPage;
         mChoices = new ArrayList<String>();
         for (int i = 0; i < fixedChoicePage.getOptionCount(); i++) {
@@ -93,6 +96,12 @@ public class MultipleChoiceFragment extends ListFragment {
         setListAdapter(getAdapter());
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
+        restoreState(listView);
+
+        return rootView;
+    }
+
+    protected void restoreState(final ListView listView) {
         // Pre-select currently selected items.
         new Handler().post(new Runnable() {
             @Override
@@ -112,8 +121,6 @@ public class MultipleChoiceFragment extends ListFragment {
                 }
             }
         });
-
-        return rootView;
     }
 
     protected ArrayAdapter<String> getAdapter() {

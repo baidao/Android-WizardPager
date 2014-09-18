@@ -94,6 +94,17 @@ public abstract class AbstractWizardModel implements ModelCallbacks {
         return flattened;
     }
 
+    private ArrayList<Page> flattenedPages;
+
+    public void flatPages() {
+        flattenedPages = new ArrayList<Page>();
+        mRootPageList.flattenCurrentPageSequence(flattenedPages);
+    }
+
+    public ArrayList<Page> getFlattenedPages() {
+        return flattenedPages;
+    }
+
     public void unregisterListener(ModelCallbacks listener) {
         mListeners.remove(listener);
     }

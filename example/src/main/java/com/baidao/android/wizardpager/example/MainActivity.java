@@ -141,7 +141,9 @@ public class MainActivity extends FragmentActivity implements
 
     @Override
     public void onPageTreeChanged() {
-        mCurrentPageSequence = mWizardModel.getCurrentPageSequence();
+        mWizardModel.flatPages();
+        mCurrentPageSequence = mWizardModel.getFlattenedPages();
+//        mCurrentPageSequence = mWizardModel.getCurrentPageSequence();
         recalculateCutOffPage();
         mStepPagerStrip.setPageCount(mCurrentPageSequence.size() + 1); // + 1 =
         // review
@@ -246,11 +248,11 @@ public class MainActivity extends FragmentActivity implements
 
         @Override
         public Fragment getItem(int i) {
-            if (i >= mCurrentPageSequence.size()) {
+            if (i >= mWizardModel.getFlattenedPages().size()) {
                 return new ReviewFragment();
             }
 
-            return mCurrentPageSequence.get(i).createFragment();
+            return mWizardModel.getFlattenedPages().get(i).createFragment();
         }
 
         @Override
@@ -273,8 +275,8 @@ public class MainActivity extends FragmentActivity implements
 
         @Override
         public int getCount() {
-            return Math.min(mCutOffPage + 1, mCurrentPageSequence == null ? 1
-                    : mCurrentPageSequence.size() + 1);
+            return Math.min(mCutOffPage + 1, mWizardModel.getFlattenedPages() == null ? 1
+                    : mWizardModel.getFlattenedPages().size() + 1);
         }
 
         public void setCutOffPage(int cutOffPage) {

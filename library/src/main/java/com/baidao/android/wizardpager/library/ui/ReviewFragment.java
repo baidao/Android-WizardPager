@@ -47,6 +47,7 @@ public class ReviewFragment extends ListFragment implements ModelCallbacks {
     private List<ReviewItem> mCurrentReviewItems;
 
     private ReviewAdapter mReviewAdapter;
+    private int contentLayout = R.layout.fragment_page;
 
     public ReviewFragment() {
     }
@@ -60,7 +61,7 @@ public class ReviewFragment extends ListFragment implements ModelCallbacks {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_page, container, false);
+        View rootView = inflater.inflate(getContentLayout(), container, false);
 
         TextView titleView = (TextView) rootView.findViewById(android.R.id.title);
         titleView.setText(R.string.review);
@@ -179,5 +180,14 @@ public class ReviewFragment extends ListFragment implements ModelCallbacks {
         public int getCount() {
             return mCurrentReviewItems.size();
         }
+    }
+
+    public int getContentLayout() {
+        return contentLayout;
+    }
+
+    public ReviewFragment setContentLayout(int contentLayout) {
+        this.contentLayout = contentLayout;
+        return this;
     }
 }

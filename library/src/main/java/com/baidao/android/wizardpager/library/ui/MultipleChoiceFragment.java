@@ -40,13 +40,15 @@ import java.util.List;
 import java.util.Set;
 
 
-public class MultipleChoiceFragment extends ListFragment implements IPageFragment {
+public class MultipleChoiceFragment extends ListFragment {
     private static final String ARG_KEY = "key";
 
     private PageFragmentCallbacks mCallbacks;
     private String mKey;
     private List<String> mChoices;
     private Page mPage;
+
+    private int contentLayout = R.layout.fragment_page;
 
     public static MultipleChoiceFragment create(String key) {
         Bundle args = new Bundle();
@@ -152,8 +154,12 @@ public class MultipleChoiceFragment extends ListFragment implements IPageFragmen
         mPage.notifyDataChanged();
     }
 
-    @Override
     public int getContentLayout() {
         return R.layout.fragment_page;
+    }
+
+    public MultipleChoiceFragment setContentLayout(int contentLayout) {
+        this.contentLayout = contentLayout;
+        return this;
     }
 }

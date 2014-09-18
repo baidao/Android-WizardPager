@@ -37,6 +37,8 @@ public class GeoFragment extends Fragment implements SimpleLocationListener {
     private TextView textViewLocation;
     private ProgressBar progressBar;
 
+    private int contentLayout = R.layout.fragment_page_geo;
+
     private Geocoder mGeocoder;
 
     public static GeoFragment create(String key) {
@@ -68,8 +70,7 @@ public class GeoFragment extends Fragment implements SimpleLocationListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_page_geo, container,
-                false);
+        View rootView = inflater.inflate(getContentLayout(), container, false);
         UIManager.setTitle(mPage, this, rootView);
 
         textViewLocationStatus = (TextView) rootView
@@ -96,6 +97,15 @@ public class GeoFragment extends Fragment implements SimpleLocationListener {
             mLocationHandler.startLocationUpdates();
         }
         return rootView;
+    }
+
+    public int getContentLayout() {
+        return this.contentLayout;
+    }
+
+    public GeoFragment setContentLayout(int contentLayout) {
+        this.contentLayout = contentLayout;
+        return this;
     }
 
     @Override

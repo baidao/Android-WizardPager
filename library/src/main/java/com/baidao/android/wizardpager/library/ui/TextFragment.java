@@ -26,6 +26,7 @@ public class TextFragment extends Fragment {
 	private PageFragmentCallbacks mCallbacks;
 	private String mKey;
 	private Page mPage;
+    private int contentLayout = R.layout.fragment_page_text;
 
 	protected EditText mEditTextInput;
 
@@ -56,7 +57,7 @@ public class TextFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_page_text,
+		View rootView = inflater.inflate(getContentLayout(),
 				container, false);
         UIManager.setTitle(mPage, this, rootView);
 
@@ -65,7 +66,7 @@ public class TextFragment extends Fragment {
 		return rootView;
 	}
 
-	@Override
+    @Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 
@@ -130,4 +131,12 @@ public class TextFragment extends Fragment {
 		}
 	}
 
+    public int getContentLayout() {
+        return contentLayout;
+    }
+
+    public TextFragment setContentLayout(int contentLayout) {
+        this.contentLayout = contentLayout;
+        return this;
+    }
 }

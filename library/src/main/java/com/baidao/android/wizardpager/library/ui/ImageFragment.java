@@ -38,6 +38,8 @@ public class ImageFragment extends Fragment {
 
 	private ImageView imageView;
 
+    private int contentLayout = R.layout.fragment_page_image;
+
 	private Uri mNewImageUri;
 
 	public static ImageFragment create(String key) {
@@ -82,8 +84,7 @@ public class ImageFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_page_image,
-				container, false);
+		View rootView = inflater.inflate(getContentLayout(), container, false);
         UIManager.setTitle(mPage, this, rootView);
 
 		imageView = (ImageView) rootView.findViewById(R.id.imageView);
@@ -204,4 +205,12 @@ public class ImageFragment extends Fragment {
 
 	}
 
+    public int getContentLayout() {
+        return contentLayout;
+    }
+
+    public ImageFragment setContentLayout(int contentLayout) {
+        this.contentLayout = contentLayout;
+        return this;
+    }
 }

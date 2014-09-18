@@ -43,6 +43,7 @@ public class SingleChoiceFragment extends ListFragment {
     private List<String> mChoices;
     private String mKey;
     private Page mPage;
+    private int contentLayout = R.layout.fragment_page;
 
     public static SingleChoiceFragment create(String key) {
         Bundle args = new Bundle();
@@ -80,7 +81,7 @@ public class SingleChoiceFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_page, container, false);
+        View rootView = inflater.inflate(getContentLayout(), container, false);
         UIManager.setTitle(mPage, this, rootView);
 
         final ListView listView = (ListView) rootView.findViewById(android.R.id.list);
@@ -129,5 +130,14 @@ public class SingleChoiceFragment extends ListFragment {
         mPage.getData().putString(Page.SIMPLE_DATA_KEY,
                 getListAdapter().getItem(position).toString());
         mPage.notifyDataChanged();
+    }
+
+    public int getContentLayout() {
+        return contentLayout;
+    }
+
+    public SingleChoiceFragment setContentLayout(int contentLayout) {
+        this.contentLayout = contentLayout;
+        return this;
     }
 }

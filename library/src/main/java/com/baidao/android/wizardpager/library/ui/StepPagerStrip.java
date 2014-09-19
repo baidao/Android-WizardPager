@@ -23,9 +23,11 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.baidao.android.wizardpager.library.R;
 
@@ -48,6 +50,7 @@ public class StepPagerStrip extends View {
     private Paint mNextTabPaint;
 
     private RectF mTempRectF = new RectF();
+    private Context mContext;
 
     //private Scroller mScroller;
 
@@ -63,6 +66,7 @@ public class StepPagerStrip extends View {
 
     public StepPagerStrip(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        mContext = context;
 
         final TypedArray a = context.obtainStyledAttributes(attrs, ATTRS);
         mGravity = a.getInteger(0, mGravity);
@@ -86,6 +90,15 @@ public class StepPagerStrip extends View {
         mNextTabPaint.setColor(res.getColor(R.color.step_pager_next_tab_color));
     }
 
+    private void updateTabWidth() {
+        DisplayMetrics displayMetrics = mContext.getResources()
+            .getDisplayMetrics();
+
+        int screenWidthInPix = displayMetrics.widthPixels;
+        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) getLayoutParams();
+        mTabWidth = (int) (screenWidthInPix - mTabSpacing * (mPageCount - 1) - getPaddingLeft() - getPaddingRight() - layoutParams.leftMargin - layoutParams.rightMargin) / mPageCount;
+    }
+
     public void setOnPageSelectedListener(OnPageSelectedListener onPageSelectedListener) {
         mOnPageSelectedListener = onPageSelectedListener;
     }
@@ -97,6 +110,8 @@ public class StepPagerStrip extends View {
         if (mPageCount == 0) {
             return;
         }
+
+        updateTabWidth();
 
         float totalWidth = mPageCount * (mTabWidth + mTabSpacing) - mTabSpacing;
         float totalLeft;

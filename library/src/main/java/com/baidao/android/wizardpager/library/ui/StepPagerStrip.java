@@ -90,15 +90,6 @@ public class StepPagerStrip extends View {
         mNextTabPaint.setColor(res.getColor(R.color.step_pager_next_tab_color));
     }
 
-    private void updateTabWidth() {
-        DisplayMetrics displayMetrics = mContext.getResources()
-            .getDisplayMetrics();
-
-        int screenWidthInPix = displayMetrics.widthPixels;
-        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) getLayoutParams();
-        mTabWidth = (int) (screenWidthInPix - mTabSpacing * (mPageCount - 1) - getPaddingLeft() - getPaddingRight() - layoutParams.leftMargin - layoutParams.rightMargin) / mPageCount;
-    }
-
     public void setOnPageSelectedListener(OnPageSelectedListener onPageSelectedListener) {
         mOnPageSelectedListener = onPageSelectedListener;
     }
@@ -110,8 +101,6 @@ public class StepPagerStrip extends View {
         if (mPageCount == 0) {
             return;
         }
-
-        updateTabWidth();
 
         float totalWidth = mPageCount * (mTabWidth + mTabSpacing) - mTabSpacing;
         float totalLeft;

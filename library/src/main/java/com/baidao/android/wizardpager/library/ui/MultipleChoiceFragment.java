@@ -39,7 +39,7 @@ import java.util.List;
 import java.util.Set;
 
 
-public class MultipleChoiceFragment<T extends Page, I> extends ListFragment {
+public class MultipleChoiceFragment<T extends Page> extends ListFragment {
     protected static final String ARG_KEY = "key";
 
     protected PageFragmentCallbacks mCallbacks;

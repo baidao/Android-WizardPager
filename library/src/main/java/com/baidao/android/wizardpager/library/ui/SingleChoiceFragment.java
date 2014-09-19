@@ -89,15 +89,19 @@ public class SingleChoiceFragment<T extends Page> extends ListFragment {
         UIManager.setTitle(mPage, this, rootView);
 
         final ListView listView = (ListView) rootView.findViewById(android.R.id.list);
-        setListAdapter(new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_single_choice,
-                android.R.id.text1,
-                mChoices));
+        setListAdapter(getAdapter());
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
         restoreState(listView);
 
         return rootView;
+    }
+
+    protected ArrayAdapter<String> getAdapter() {
+        return new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_list_item_single_choice,
+                android.R.id.text1,
+                mChoices);
     }
 
     protected void restoreState(final ListView listView) {

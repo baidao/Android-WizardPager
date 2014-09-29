@@ -95,7 +95,7 @@ public class MainActivity extends FragmentActivity implements
                     mConsumePageSelectedEvent = false;
                     return;
                 }
-
+                setTitle(String.valueOf(position));
                 mEditingAfterReview = false;
                 updateBottomBar();
             }

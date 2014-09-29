@@ -48,12 +48,6 @@ public class TextFragment extends Fragment {
 		mPage = mCallbacks.onGetPage(mKey);
 	}
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        UIManager.setActionBarTitle(mPage, this);
-    }
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {

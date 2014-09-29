@@ -77,12 +77,6 @@ public class SingleChoiceFragment<T extends Page> extends ListFragment {
     }
 
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        UIManager.setActionBarTitle(mPage, this);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View rootView = inflater.inflate(getContentLayout(), container, false);

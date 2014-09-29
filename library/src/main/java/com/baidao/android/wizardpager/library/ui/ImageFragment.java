@@ -75,12 +75,6 @@ public class ImageFragment extends Fragment {
 		}
 	}
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        UIManager.setActionBarTitle(mPage, this);
-    }
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {

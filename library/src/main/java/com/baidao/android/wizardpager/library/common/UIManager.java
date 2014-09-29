@@ -11,18 +11,6 @@ import com.baidao.android.wizardpager.library.model.Page;
  */
 public class UIManager {
 
-    public static void setActionBarTitle(Page page, Fragment fragment) {
-        if (null == page) {
-            return;
-        }
-
-        if (page.isShowTitleInActionBar()) {
-            if (fragment.getUserVisibleHint()) {
-                fragment.getActivity().getActionBar().setTitle(page.getTitle());
-            }
-        }
-    }
-
     public static void setTitle(Page page, Fragment fragment, View rootView) {
         if (page.isShowTitleInActionBar()) {
             if (fragment.getUserVisibleHint()) {
